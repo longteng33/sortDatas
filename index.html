@@ -1,14 +1,31 @@
-# sortDatas
-数据归类函数  
-需求：  
-现有一组数据，数据结构为：   
-[{id:1,name:"xiaoming",sex:2},{id:2,name:"bytr",sex:1},{id:3,name:"try",sex:1}]  
-数据中的每个对象结构相同，要求按对象中的某属性归类，比如按sex归类  
-2、归类的要求一般是一个数组，其结构为：  
-var sex=[{id:1,field:'女'},{id:2,field:'男'}]  
+<!DOCTYPE html>
+<html lang="zh">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>数据归类</title>
+    <style>
+    
+    </style>
+    <!-- <link rel="stylesheet" href= "CSS文件路径"> -->
+</head>
+    
+<body>
+    
+    
+    
+    <script>
+        // 数据
+        var persons=[{id:1,name:"xiaoming",sex:2},{id:2,name:"bytr",sex:1},{id:3,name:"try",sex:1},{id:4,name:"yrt",sex:2},{id:5,name:"affg",sex:2},{id:6,name:"kdhf",sex:1},{id:7,name:"long",sex:2},]
+        var sex=[{
+            id:1,field:"女",
+        },{
+            id:2,field:"男",
+        },];
 
-```
- var cache={};
+
+        var cache={};
         sex.forEach(function(sex){
             var _id=sex.id;
            
@@ -20,18 +37,15 @@ var sex=[{id:1,field:'女'},{id:2,field:'男'}]
                 }
             })
         })
-```
 
-数据归类函数封装  
-```
-fields,数组，以什么归类  
-datas，数组，被归类的数据  
-
- function sortDatas(fields,datas){
+        // 数据归类函数封装
+        // fields,数组，以什么归类
+        // datas，数组，被归类的数据
+        // 在datas中的每一个数据是一个对象，这每个对象都有一个属性的名字是fields数组的名字；
+        function sortDatas(fields,datas){
             var cache={};
-            //mapping_field,归类项，数据中每个对象中的某个属性名，以它归类，如sex
-            //sortType两种匹配类型，单个或多个
             return function(mapping_field,sortType){
+                // 两种匹配类型，单个或多个
                 if(sortType!=="single"&&sortType!=="multi"){
                     throw new Error("Invalid sorType,only 'single' or 'multi' is valid value");
                     return;
@@ -55,9 +69,9 @@ datas，数组，被归类的数据
                 return cache;
             }
         }
-```
-使用:  
-```
-var sex_sort=sortDatas(sex,persons);  
-sex_sort("sex","single")  
-```
+        var sex_sort=sortDatas(sex,persons);
+
+        console.log(sex_sort("sex","single"))
+    </script>
+</body>
+</html>
